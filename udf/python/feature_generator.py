@@ -6,11 +6,10 @@ from odps.udf import BaseUDTF
 @annotate('* -> string')
 class FG(BaseUDTF):
   def process(self, *args):
-    features = []
     numerical_fea = args[:-1]
-    for i, fea in enumerate(numerical_fea):
-      features.append("%d:%.6f" % (i + 1, fea if fea else 0))
-
+    features = [
+        "%d:%.6f" % (i + 1, fea or 0) for i, fea in enumerate(numerical_fea)
+    ]
     offset = len(numerical_fea) + 1
     categorical_feas = args[-1]
 

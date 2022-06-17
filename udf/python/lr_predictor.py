@@ -15,5 +15,4 @@ class Predictor(object):
     def evaluate(self, s):
         fea = [1] + [float(f) for f in s.split(',')]
         lsum = np.dot(fea, self.weight)
-        prob = 1 / (1 + exp(-lsum))
-        return prob
+        return 1 / (1 + exp(-lsum))
